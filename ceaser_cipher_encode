@@ -1,0 +1,21 @@
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z','a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+#alphabet length doubled to allow for shifts at the end of the alphabet string
+direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+text = input("Type your message:\n").lower()
+shift = int(input("Type the shift number:\n"))
+
+
+
+def encrypt(plain_text, shift_amount):
+  cipher_text = "" #empty string to place generated values
+  for letter in plain_text: #use for loop to run through all the text entered 
+    position = alphabet.index(letter) #accesses list "alphabet" to be able to shift values
+    new_position = position + shift_amount #creates shifted position
+    coded = alphabet[new_position] #creates new variable to add to cipher_text
+    cipher_text+= coded #adds new letter to cipher_text
+  print(f"Keep this away from the Gauls {cipher_text}.")
+  
+plain_text = text #defined here to avoid wordy function
+shift_amount = shift #see above
+
+encrypt(plain_text, shift_amount)
