@@ -1,0 +1,29 @@
+student_scores = {
+  "Harry": 81,
+  "Ron": 78,
+  "Hermione": 99, 
+  "Draco": 74,
+  "Neville": 62,
+}
+
+
+student_grades = {} #empty dictionary
+
+
+for student in student_scores: #student creates new variable; b/c dictionary, will use key
+  score = student_scores[student] #this line assigns the value of student(key) to a new variable 
+  if score > 90:
+    student_grades[student] = "Outstanding"
+  elif score > 80:
+    student_grades[student] = "Exceeds Expectations"
+  elif score > 70:
+    student_grades[student] = "Acceptable"
+  else:
+    student_grades[student] = "Fail"
+
+
+  
+    
+
+
+print(student_grades)
