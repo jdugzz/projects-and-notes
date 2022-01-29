@@ -1,0 +1,35 @@
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+#the above is the list the computer will access for the alphabet 
+
+def caesar(start_text, shift_amount, cipher_direction): #creates caesar cipher function
+  end_text = "" #creates an empty variable to put the shifted text into 
+  if cipher_direction == "decode":
+    shift_amount *= -1 #this will change the input to a negative number to undo an encode funciton, i.e., decode 
+  for char in start_text: #this creates a loop to run through the start_text variable (created outside of the function below)
+    if char in alphabet: #runs through the alphabet list
+      position = alphabet.index(char) #creates position variable that will create an integer of the character through list via .index()
+      new_position = position + shift_amount #this creates a new variable that adds the shift amount(og input) to the initial input
+      end_text += alphabet[new_position] #this will add the new letter to the above empty string to be print 
+    else:
+      end_text += char #this passes through additional characters, such as " " and numbers and leaves them unmodified 
+  print(f"Here's the {cipher_direction}d result: {end_text}") #prints result for user 
+
+
+from art import logo
+print(logo)
+
+
+should_end = False #this will keep the program running until changed
+while not should_end: #not a big fan of this syntax, could be changed to while should_end == False
+
+  direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n") #encode v. decode
+  text = input("Type your message:\n").lower() #text input
+  shift = int(input("Type the shift number:\n")) #shift amount
+    shift = shift % 26 #this will create a value if the input is greater than 42
+
+  caesar(start_text=text, shift_amount=shift, cipher_direction=direction) #runs caesar function 
+
+  restart = input("Type 'yes' if you want to go again. Otherwise type 'no'.\n") #this asks the user if they want to run the program again
+  if restart == "no": #will restart the function 
+    should_end = True 
+    print("Goodbye")
