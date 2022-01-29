@@ -1,0 +1,22 @@
+print("Welcome to the tip calculator.") 
+#introductory statement
+
+tb = float(input("What was the total bill? $")) 
+#creates variable for total bill - want float b/c division will be done
+
+percentage = int(input("What percentage tip are you leaving? 10%, 12%, or 15%? "))
+#creates variable for desired tip
+
+split = int(input("How many people are splitting the bill? ")) 
+#creates variable for how it should be split
+
+percentage = ((percentage) / 100) + 1 
+#creates new percentage variable to get workable percent number 
+
+pay = (tb / split) * percentage 
+#puts the result of the tb/split * percentage into a new variable
+
+pay = str(round(pay, 2)) 
+#rounds pay variable to two decimal places
+
+print(pay) #prints out result
