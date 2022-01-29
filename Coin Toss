@@ -1,0 +1,13 @@
+import random
+#random module required 
+
+result = random.randint(0,1)
+#creates result variable that allows the computer to choose b/t 0 and 1
+
+if result == 0:
+  print("Heads.")
+#makes result == 0 print out "heads" so user can read
+
+else:
+  print("Tails.")
+#makes result == 1 print out "tails" so user can read
