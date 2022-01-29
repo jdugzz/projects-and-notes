@@ -1,0 +1,62 @@
+rock = '''
+    _______
+---'   ____)
+      (_____)
+      (_____)
+      (____)
+---.__(___)
+'''
+
+paper = '''
+    _______
+---'   ____)____
+          ______)
+          _______)
+         _______)
+---.__________)
+'''
+
+scissors = '''
+    _______
+---'   ____)____
+          ______)
+       __________)
+      (____)
+---.__(___)
+'''
+#the above is ascii art to improve the user experience 
+
+
+import random #need random module to randomize choice
+
+computerchoice = [rock, paper, scissors] #creates a list for the computer to choose from
+
+player_choice = int(input("What do you choose? 0 for Rock, 1 for Paper, or 2 for scissors? \n"))
+#the above is to create the player's variable
+
+random_index = random.randint(0, 2) #this is the funciton that will randomly pick the computer choice
+
+if random_index == 0: #this sets up the result of the computer's input
+  print(rock) #this prints the ascii art to imrove player experience
+  if player_choice == 0: # this, and the below statements set up the adversarial system and rules for winning, losing, or drawing
+    print("Draw!")
+  if player_choice == 1:
+    print("You Win")
+  if player_choice == 2:
+    print("You lose)
+elif random_index == 1:
+  print(scissors)
+  if player_choice == 0:
+    print("You Win!")
+  if player_choice == 1:
+    print("You Lose )-:")
+  if player_choice == 2:
+    print("Draw!")
+else:
+  print(paper)
+  if player_choice == 0:
+    print("You Lose )-:")
+  if player_choice == 1:
+    print("Draw!")
+  if player_choice == 2:
+    print("You Win!")
