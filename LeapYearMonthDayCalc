@@ -1,0 +1,27 @@
+def is_leap(year): #this function will determine if a year is a leap year by running through basic leapyear determination math
+  if year % 4 == 0:
+    if year % 100 == 0:
+      if year % 400 == 0:
+        return True #using return rather than print to keep the function inline with end goal
+      else:
+        return False 
+    else:
+      return True
+  else:
+    return False
+
+def days_in_month(year, month): #creates month function
+  leap = is_leap(year) #creates leap variable to hold result of is_leap(year) function
+  monthno = month - 1 #b/c humans start counting from 1 as opposed to comp. count 0, needed to remain intuitive for humans
+  month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] #list that holds all of the days per month for a year
+  month_days[monthno] #accesses the month_days list with the human input (adjusted for human/computer count disconnect)
+  if leap == True:
+    month_days[1] = 29 #bc the only date modified if leap year is [1], this will be the only thing modified
+  return month_days[monthno] #creates output for the function iun the form of a numerical vlaue
+  
+  
+
+year = int(input("Enter a year: ")) #year input variable
+month = int(input("Enter a month: ")) #month input variable
+days = days_in_month(year, month) #days variable that accesses result of the days_in_month() function
+print(days) #printsfinal result for user
