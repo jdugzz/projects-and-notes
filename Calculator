@@ -1,0 +1,41 @@
+def add(n1, n2):
+  return n1 + n2
+
+def subtract(n1, n2):
+  return n1 - n2
+
+def multiply(n1, n2): 
+  return n1 * n2
+
+def divide(n1, n2): #the above functions are to add, subtract, multiply, and divide, respectively. 
+  return n1 / n2
+
+operations = { #this is a dictionary that connects the above functions with user input
+  "+": add,
+  "-": subtract,
+  "*": multiply,
+  "/": divide
+}
+
+def calculator(): #calculator is defined as a function in order to allow it to call itself, allowing for further use after initial calculations
+  num1 = float(input("What's the first number?: ")) #creates a variable for the first number, saved as float for decimals
+  for symbol in operations: #this gives the user options to pick from, as well as instructs user format to use 
+    print(symbol)
+  should_continue = True #this variable allows the use to either run the function with previous values or start again
+
+  while should_continue == True: #see above comment
+    operation_symbol = input("Pick an operation: ") #this creates a variable that will draw from the operations dictionary
+    num2 = float(input("What's the next number?: ")) #second number to be used in calculation
+    calculation_function = operations[operation_symbol] #this pulls the funciton from the operations dictionary
+    answer = calculation_function(num1, num2) #this provides the answer for the user
+
+    print(f"{num1} {operation_symbol} {num2} = {answer}") #prints answer
+
+    if input(f"Type 'y' to continue calculating with {answer}, or type 'n' to start a new calculation: ") == 'y':
+      num1 = answer #this "if" statement allows the user to continue with the original number, or restart the calculator
+    else:
+      should_continue = False #this changes the above "while" condition to allow the user to start again
+      calculator() #this recalls the funciton, allowing the user to start again
+
+
+calculator()
