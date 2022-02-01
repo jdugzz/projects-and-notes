@@ -1,153 +1,112 @@
 import random
 import replit
-cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]  
 
-def deal_cardsp():
+def blackjack():
   pcards = []
   pcc = 0
   while pcc < 2:
     pcards.append(int(random.choice(cards)))
     pcc += 1
-  return pcards
-  
-def deal_cardsc():
+  pscore = (sum(pcards))
   ccards = []
   ccc = 0
   while ccc < 2:
     ccards.append(int(random.choice(cards)))
     ccc += 1
-  return ccards
-
-def calculate_pscore():
-  pscore = (sum(pcards))
-  return pscore
-
-def calculate_cscore():
   cscore = (sum(ccards))
-  return cscore
 
-def draw_againp(pcards):
-  new_card = (int(random.choice(cards)))
-  return new_card
+  def scorecheck():
+    if pscore == 21 and cscore == 21:
+      print("Draw.")
+      
+    elif pscore == 21:
+      print("Player wins.")
+    elif cscore == 21:
+      print ("You lose.")
+      print(f"The computer won with {ccards[0]} and {ccards[1]}.")
+    elif pscore > 21:
+      print("You lose.")
 
-def draw_againc(ccards):
-  new_card = (int(random.choice(cards)))
-  return new_card
+  def phit(pscore):
+    if pscore < 21:
+      cards[0] = 11
+    if pscore > 21:
+      cards[0] = 1
+    new_card = draw_againp(pcards)
+    pcards.append(int(new_card))
+    pscore = sum(pcards)
+    print(f"You drew a {new_card}. Your new total is {pscore}.")
+    return pscore
 
-def phit(pscore):
-  if pscore < 21:
-    cards[0] = 11
-  if pscore > 21:
-    cards[0] = 1
-  new_card = draw_againp(pcards)
-  pcards.append(int(new_card))
-  pscore = calculate_pscore()
-  print(f"You drew a {new_card}. Your new total is {pscore}.")
-  return pscore
+  def chit(cscore):
+    if cscore < 21:
+      cards[0] = 11
+    if cscore > 21:
+      cards[0] = 1
+    new_card = draw_againc(ccards)
+    ccards.append(int(new_card))
+    cscore = sum(ccards)
+    if cscore > 21:
+      print(f"You win. Dealer busted with {cscore}.")
+      endgame()
+    return cscore
 
-def chit(cscore):
-  
-  if cscore < 21:
-    cards[0] = 11
-  if cscore > 21:
-    cards[0] = 1
-  new_card = draw_againc(ccards)
-  ccards.append(int(new_card))
-  cscore = calculate_cscore()
-  if cscore > 21:
-    print("You win. Dealer bust.")
-    endgame()
-  return cscore
+  def final_scorecheck():
+    if pscore == 21 and cscore == 21:
+      print("Draw.") 
+      endgame()
+    if pscore > 21:
+      print("You lose.")
+      endgame()  
+    elif pscore == 21:
+      print("Player wins.") 
+      endgame()
+    elif pscore > cscore:
+      print("You win!")
+      endgame()  
+    elif pscore == cscore:
+      print("Draw.")  
+      endgame()
+    elif pscore < cscore and cscore < 22:
+      print(f"You lose. The computer had {cscore}.")
+      endgame()
 
-def scorecheck():
-  
-  if pscore == 21 and cscore == 21:
-    print("Draw.")
-    endgame()
-  elif pscore == 21:
-    print("Player wins.")
-    endgame()
-  elif cscore == 21:
-    print("You lose.")
-    print(f"The computer won with {cardlistc[0]} and {cardlistc[1]}." )
-    endgame()
-  elif pscore > 21:
-    print("You lose.")
-    endgame()
-  return final
-
-def final_scorecheck():
-  
-  if pscore == 21 and cscore == 21:
-    print("Draw.")
-    endgame()
-  if pscore > 21:
-    print("You lose.")
-    endgame()
-  elif pscore == 21:
-    print("Player wins.")
-    final = endgame()
-  elif pscore > cscore:
-    print("You win!")
-    endgame()
-  elif pscore == cscore:
-    print("Draw.")
-    endgame()
-  elif pscore < cscore and cscore < 22:
-    print(f"You lose. The computer had {cscore}.")
-    endgame()
-  
-
-def endgame():
-  final = False
-  restart = input("Would you like to play again? Type 'y' to go again. ").lower
-  if restart == "y":
-    replit.clear()
-    final = False
-    return final
-  else:
-    replit.clear()
-    print("Goodbye!")
-  return final
-  
-
-final = False
-if final == False:
-
-  cardlistp = deal_cardsp()
-  cardlistc = deal_cardsc()
-
-  deal_cardsp()
-  deal_cardsc()
-
-  pcards = cardlistp
-  ccards = cardlistc
+  def endgame():
+    play_again = input("Would you like to play again? Type 'yes' to play again. ").lower()
+    if play_again == "yes":
+      replit.clear()
+      blackjack()
+    else:
+      replit.clear()
+      print("Thanks for playing. See you, space cowboy.")
+      
 
 
 
-  pscore = calculate_pscore()
-  cscore = calculate_cscore()
 
   print(f"Your cards are {pcards[0]} and {pcards[1]}, for a total of {pscore}. The computer has {ccards[0]}, with a hidden card.")
 
   scorecheck()
   go_again = False
   while pscore < 21 and go_again == False:
-    query = input("Do you want to draw another card? ").lower()
+    query = input("Do you want to draw another card? Type 'yes' to draw again. ").lower()
     if query == "yes":
       pscore = phit(pscore)
+      if pscore > 21:
+        print("You busted.")
+        endgame()
+      elif pscore == 21:
+        print("You won!")
+        endgame()
     else:
       go_again = True
       while cscore < 17:
         print("The computer draws.")
-        cscore = chit(cscore)
-        if int(cscore) > 21:
-          print(f"The computer busted with {cscore}. You win!")
-          final = final_scorecheck()
+        cscore = int(chit(cscore))
       if cscore > 17:
-          print("The computer stands.")
-          print(cscore)
+        print("the computer stands.")
+        print(cscore)
+      final_scorecheck()
 
-  final = final_scorecheck()
-else:
-  print("Thanks for playing. See you, space cowboy.")
+blackjack()
