@@ -1,0 +1,48 @@
+def number_gen():
+  import random
+  number = random.randint(1,100)
+  return number
+
+final_number = number_gen()
+
+def guess():
+  global lives
+  guess = int(input("Guess a number. "))
+  if guess == final_number:
+    print(f"You win! The number was {final_number}.")
+  elif guess > final_number:
+    print("Too high.")
+    lives -= 1
+  elif guess < final_number:
+    print("Too low.")
+    lives -= 1
+
+def easy_mode():
+  global lives
+  print(lives)
+  while lives > 0:
+    print(f"You have {lives} lives left.")
+    guess()
+  if lives == 0:
+    print("You lose.")
+
+def hard_mode():
+  global lives
+  print(lives)
+  while lives > 0:
+    print(f"You have {lives} lives left.")
+    guess()
+  if lives == 0:
+    print("You lose.")
+
+
+difficulty = input("Welcome to the Number Guessing Game!\nThe rules are simple.\nI'm going to pick a number between 1 and 100. You're going to try to guess it.\nDo you want to play on easy or hard? ").lower()
+
+lives = 0
+
+if difficulty == "easy":
+  lives += 10
+  easy_mode() 
+elif difficulty == "hard":
+  lives += 5
+  hard_mode()
