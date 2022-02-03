@@ -1,0 +1,46 @@
+from game_data import data
+from art import logo
+from art import vs
+import random
+
+print(logo)
+
+def contestanta():
+  guest = random.choice(data)
+  name = guest['name']
+  description = guest['description']
+  country = guest['country']
+  follower_count = int(guest['follower_count'])
+  print(f"A = {name} who is a {description} from {country}.")
+  return follower_count
+
+def contestantb():
+  guest = random.choice(data)
+  name = guest['name']
+  description = guest['description']
+  country = guest['country']
+  follower_count = int(guest['follower_count'])
+  print(f"B = {name} who is a {description} from {country}.")
+  return follower_count
+
+def game_run_cycle():
+  a = contestanta()
+  print(vs)
+  b = contestantb()
+  player_choice = input("Who has more followers? A or B? ").lower()
+  if player_choice == "a" and a > b:
+    print("You win!")
+  elif player_choice == "a" and a < b:
+    print("You lose!")
+  elif player_choice == "b" and a > b:
+    print("You lose!")
+  elif player_choice == "b" and a < b:
+    print("You win!")
+  a = b
+  b = contestantb()
+  game_run_cycle()
+
+
+
+
+game_run_cycle()
