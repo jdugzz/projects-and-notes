@@ -1,0 +1,125 @@
+from recipe import MENU
+from recipe import resources
+
+penny = .01
+nickel = .05
+dime = .10
+quarter = .25
+
+def currency_exch():
+    penny_total = int(input("How many pennies are you using? "))
+    nickel_total = int(input("How many nickels are you using? "))
+    dime_total = int(input("How many dimes are you using? "))
+    quarter_total = int(input("How many quarters are you using? "))
+    def value(pt = penny_total, nt = nickel_total, dt = dime_total, qt = quarter_total):
+        pennyamt = float(pt * .01)
+        nickelamt = float(nt * .05)
+        dimeamt = float(dt * .10)
+        quarteramt = float(qt * .25)
+        money = pennyamt + nickelamt + dimeamt + quarteramt
+        return (money)
+    value(pt = penny_total, nt = nickel_total, dt = dime_total, qt = quarter_total)
+    return value(pt = penny_total, nt = nickel_total, dt = dime_total, qt = quarter_total)
+
+
+
+
+
+
+direc = input("What would you like? Espresso, latte, or cappuccino? ").lower()
+
+if direc == "report":
+
+    print(resources)
+
+elif direc == "espresso":
+
+    money_entered = float(currency_exch())
+
+    if money_entered >= 1.5:
+        resources["money"] = resources["money"] + 1.5
+
+        if resources["water"] >= 50 and resources["coffee"] >= 18:
+
+            resources["water"] = resources["water"] - 50
+            resources["coffee"] = resources["coffee"] - 18
+
+            if money_entered > 1.5:
+
+                refund = round(money_entered - 1.5)
+                print(f"Here's your espresso. Your refund is {refund}.")
+
+            else:
+                print("Here's your espresso.")
+
+        else:
+
+            print("There's not enough resources to make an espresso right now.")
+
+
+
+    else:
+        print("You did not insert enough money.")
+
+elif direc == "latte":
+
+    money_entered = float(currency_exch())
+
+    if money_entered >= 2.5:
+        resources["money"] = resources["money"] + 2.5
+
+        if resources["water"] >= 200 and resources["coffee"] >= 24 and resources["milk"] >= 150:
+
+            resources["water"] = resources["water"] - 200
+            resources["coffee"] = resources["coffee"] - 24
+            resources["milk"] = resources["milk"] - 150
+
+            if money_entered > 2.5:
+
+                refund = round(money_entered - 2.5, 2)
+                print(f"Here's your latte. Your refund is {refund}.")
+
+            else:
+                print("Here's your latte.")
+
+        else:
+
+            print("There's not enough resources to make a latte right now.")
+
+
+
+    else:
+        print("You did not insert enough money.")
+
+elif direc == "cappuccino":
+
+    money_entered = float(currency_exch())
+
+    if money_entered >= 3.0:
+        resources["money"] = resources["money"] + 3.0
+
+        if resources["water"] >= 250 and resources["coffee"] >= 24 and resources["milk"] >= 100:
+
+            resources["water"] = resources["water"] - 250
+            resources["coffee"] = resources["coffee"] - 24
+            resources["milk"] = resources["milk"] - 100
+
+            if money_entered > 3.0:
+
+                refund = round(money_entered - 3.0, 2)
+                print(f"Here's your cappuccino. Your refund is {refund}.")
+
+            else:
+                print("Here's your cappuccino.")
+
+        else:
+
+            print("There's not enough resources to make a cappuccino right now.")
+
+
+
+    else:
+        print("You did not insert enough money.")
+
+elif direc == "off":
+    print("The machine will now shut down.")
